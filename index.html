@@ -61,13 +61,16 @@
       //mapbox.light to adjust basemap later on
     });
 
-    omnivore.csv('data/2010_2017_hab_events.csv')
+    omnivore.csv('data/hab_events_2007-2015_10000_min.csv')//.addTo(map);
+
     .on('ready', function(e) {
         console.log(e.target)
       })
       .on('error', function(e) {
         console.log(e.error[0].message);
       });
+
+
   </script>
 
 </body>
