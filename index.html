@@ -42,8 +42,21 @@
     </div>
     <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
       <div id="map" class='viewport-twothirds viewport-full-ml'></div>
+
+        <!-- ui slider -->
+        <div id='slider' class='range w240 bg-white round-ml px12'>
+            <input type='range' />
+          </div>
+
+        <!-- legend -->
+        <div id='legend' class='bg-white round-ml px18 py12'>
+          <h3 class='txt-bold mb12 w-full mx-auto'>Legend Title</h3>
+          <div class='bg-blue h180 w240 mx-auto'></div>
+        </div>
+
     </div>
-  </div>
+    </div>
+
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.20.0/assembly.js"></script>
   <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
   <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
@@ -61,15 +74,50 @@
       //mapbox.light to adjust basemap later on
     });
 
-    omnivore.csv('data/hab_events_2007-2015_10000_min.csv')//.addTo(map);
+    omnivore.csv('data/hab_events_2007-2015_10000_min.csv') //.addTo(map);
 
+    /*
     .on('ready', function(e) {
         console.log(e.target)
       })
       .on('error', function(e) {
         console.log(e.error[0].message);
       });
+    */
 
+    var legendControl = L.control({
+      position: 'bottomright'
+    });
+
+    legendControl.onAdd = function (map) {
+
+      var legend = L.DomUtil.get("legend");
+
+      L.DomEvent.disableScrollPropagation(legend);
+      L.DomEvent.disableClickPropagation(legend);
+
+      return legend;
+
+    }
+
+  legendControl.addTo(map);
+
+  var sliderControl = L.control({
+    position: 'bottomleft'
+  });
+
+  sliderControl.onAdd = function(map) {
+
+    var controls = L.DomUtil.get("slider");
+
+    L.DomEvent.disableScrollPropagation(controls);
+    L.DomEvent.disableClickPropagation(controls);
+
+    return controls;
+
+  }
+
+  sliderControl.addTo(map);
 
   </script>
 
