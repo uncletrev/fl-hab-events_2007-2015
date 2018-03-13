@@ -29,6 +29,7 @@
           opacity: 1,
           weight: 2,
           fillOpacity: .6,
+          color: getColor(feature.properties.Count_)
         })
       }
     }
@@ -105,6 +106,15 @@
 
       });
 
+  }
+
+  function getColor(val) {
+
+    if(+val < 99999) {
+      return "orange"
+    } else {
+      return "green"
+    }
   }
 
   function drawLegend(data) {
