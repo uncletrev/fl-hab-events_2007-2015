@@ -28,7 +28,7 @@
           radius: 1.5,
           opacity: 1,
           weight: 2,
-          fillOpacity: 1,
+          fillOpacity: .6,
         })
       }
     }
@@ -52,11 +52,26 @@
     return radius * .003
   }
 
-  function resizeCircles(dataLayer) {
+  function resizeCircles(dataLayer, val) {
 
     dataLayer.eachLayer(function(layer) {
       var radius = calcRadius(Number(layer.feature.properties['Count_']));
       layer.setRadius(radius);
+
+      // var date = layer.feature.properties.DATE;
+      //     date = date.slice(-4, date.length)
+
+      if(+layer.feature.properties.YEAR != val) {
+        layer.setStyle({
+          opacity: 0,
+          fillOpacity: 0
+        })
+      } else {
+        layer.setStyle({
+          opacity: 1,
+          fillOpacity: 1
+        })
+      }
     });
   }
 
@@ -80,12 +95,13 @@
     sliderControl.addTo(map);
 
     $('#slider input[type=range]')
-      .on('input', function() {
-        var sampleYears = 
+      .on('input change', function() {
+      
+        //var sampleYears = 
 
         //["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]
 
-        resizeCircles(dataLayer, sampleYears);
+        resizeCircles(dataLayer, this.value);
 
       });
 
