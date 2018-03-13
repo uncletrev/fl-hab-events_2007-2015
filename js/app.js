@@ -77,16 +77,17 @@
 
     }
 
+    sliderControl.addTo(map);
+
     $('#slider input[type=range]')
       .on('input', function() {
-        var currentYear = this.value;
+        var sampleYears = 
 
-        resizeCircles(dataLayer, currentYear);
+        //["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]
+
+        resizeCircles(dataLayer, sampleYears);
 
       });
-
-
-    sliderControl.addTo(map);
 
   }
 
