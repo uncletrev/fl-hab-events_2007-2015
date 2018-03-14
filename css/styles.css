@@ -1,3 +1,30 @@
   #map {
     background: #448ee4;
   }
+
+  #slider {
+    width: 176px;
+    padding: 8px 25px 8px 15px;
+    background: rgba(75, 75, 75, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    color: whitesmoke;
+  }
+
+  #slider .min {
+    float: left;
+  }
+
+  #slider .max {
+    float: right;
+    margin-right: -15px;
+  }
+
+  .ui-slider {
+    width: 100%;
+  }
+
+  label {
+    font-size: 1.1em;
+    font-weight: bold;
+  }

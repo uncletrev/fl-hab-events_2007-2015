@@ -16,12 +16,16 @@
     <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
       <div class='flex-parent flex-parent--column viewport-third h-full hmax-full bg-white py18 px12'>
         <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
-          <h1 class='txt-h1 mb6'>Title here</h1>
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <h2 class='txt-xl mt18 mb12'>subheading</h2>
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+          <h2 class='txt-h2 mb6'>Florida Red Tide Events 2007-2015</h2>
+          <p>This map displays significant red tide events caused by the bacteria Karenia brevis in Florida from the years 2007-2015.</p>
+          <h3 class='txt-l mt18 mb12'>What is Karenia brevis?</h3>
+          <p></p>
+          <h3 class='txt-l mt18 mb12'>Red Tide Effects on Marine and Human Health</h3>
+          <p></p>
+          <h3 class='txt-l mt18 mb12'>Relationship to Fish Kills</h3>
+          <p></p>
+          <h3 class='txt-l mt18 mb12'>Data Collection Methods</h3>
+          <p></p>
         </div>
         <footer class='px12 py12 bg-gray-faint txt-s'>
           <ul>
@@ -38,19 +42,26 @@
     <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
       <div id="map" class='viewport-twothirds viewport-full-ml'></div>
 
-        <!-- ui slider -->
-        <div id='slider' class='range w240 bg-white round-ml px12'>
-            <input type='range' min="2007" , max="2015" , value="2007" , step="1" />
-          </div>
+      <!-- ui slider -->
+      <div id='slider' class='range w240 bg-white round-ml px12'>
+        <input type='range' min="2007" , max="2015" , value="2007" , step="1" class="ui-slider" />
+      </div>
 
-        <!-- legend -->
-        <div id='legend' class='bg-white round-ml px18 py12'>
-          <h3 class='txt-bold mb12 w-full mx-auto'>Legend Title</h3>
-          <div class='bg-blue h180 w240 mx-auto'></div>
-        </div>
+      <!--- ui slider legend -->
+      <div id='year' class='pt6 px12 bg-white border border--gray-light round'>
+        <p class='txt-bold'>Year:
+          <span>2007</span>
+        </p>
+      </div>
+
+      <!-- legend -->
+      <div id='legend' class='bg-white round-ml px18 py12'>
+        <h3 class='txt-bold mb12 w-full mx-auto'>Legend Title</h3>
+        <div class='bg-blue h180 w240 mx-auto'></div>
+      </div>
 
     </div>
-    </div>
+  </div>
 
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.20.0/assembly.js"></script>
   <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
