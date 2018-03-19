@@ -159,16 +159,16 @@
 
     var dataValues = data.features.map(function (samples) {
 
-      for (var count in samples.properties) {
+      for (var count in samples.properties.Count_) {
 
-        var value = samples.properties[count];
+        var value = samples.properties.Count_[count];
 
         if (+value) {
 
           return +value;
         }
       }
-    });
+    }); //OBJECT_ID is being looped not Count_
 
     console.log(dataValues);
 
