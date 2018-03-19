@@ -157,11 +157,11 @@
 
     legendControl.addTo(map);
 
-    var dataValues = data.features.map(function(count) {
+    var dataValues = data.features.map(function(samples) {
 
-      for (var samples in samples.properties) {
+      for (var samples in count_.properties) {
 
-        var value = samples.properties[samples];
+        var value = count_.properties[samples];
 
         if (+value) {
 
