@@ -47,33 +47,11 @@
 
     sequenceUI(dataLayer);
 
-    updateMap(dataLayer);
-
   }
 
   function calcRadius(val) {
     var radius = Math.sqrt(val / Math.PI);
     return radius * .005
-  }
-
-  function resizeCircles(dataLayer, val) {
-
-    dataLayer.eachLayer(function(layer) {
-      var radius = calcRadius(Number(layer.feature.properties['Count_']));
-      layer.setRadius(radius);
-
-      if (+layer.feature.properties.YEAR != val) {
-        layer.setStyle({
-          opacity: 0,
-          fillOpacity: 0.04
-        })
-      } else {
-        layer.setStyle({
-          opacity: 1.0,
-          fillOpacity: 0.9
-        })
-      }
-    });
   }
 
   /* How to get this function working without turning on hidden data layers hidden by line 62?
@@ -157,17 +135,9 @@
 
     legendControl.addTo(map);
 
-    var dataValues = data.features.map(function (samples) {
+    var dataValues = data.features.map(function(samples) {
+      return +samples.properties.Count_
 
-      for (var count in samples.properties.Count_) {
-
-        var value = samples.properties.Count_[count];
-
-        if (+value) {
-
-          return +value;
-        }
-      }
     }); //OBJECT_ID is being looped not Count_
 
     console.log(dataValues);
@@ -245,18 +215,34 @@
 
   }
 
-  function updateMap(dataLayer) {
+  function resizeCircles(dataLayer, val) {
 
     dataLayer.eachLayer(function(layer) {
 
       var props = layer.feature.properties;
 
-      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + layer.feature.properties.Count_ + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Adundance: " + props["COUNT_CLASS"]
+      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + Number(layer.feature.properties.Count_).toLocaleString() + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Adundance: " + props["COUNT_CLASS"]
 
-      layer.bindTooltip(tooltipInfo, {
-        sticky: true,
-        tooltipAnchor: [300, 300]
-      });
+      var radius = calcRadius(Number(layer.feature.properties['Count_']));
+      layer.setRadius(radius);
+
+      if (+layer.feature.properties.YEAR != val) {
+        layer.setStyle({
+          opacity: 0,
+          fillOpacity: 0
+        })
+        layer.unbindTooltip();
+      } else {
+        layer.setStyle({
+          opacity: 1.0,
+          fillOpacity: 0.9
+        })
+        layer.bindTooltip(tooltipInfo, {
+          sticky: true,
+          tooltipAnchor: [300, 300]
+        });
+      }
+
     });
   }
 

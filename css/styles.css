@@ -41,3 +41,7 @@
     float: left;
     margin-right: 10px;
   }
+
+  .legend-circles div {
+    border-radius: 50%;
+  }
