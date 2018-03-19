@@ -19,7 +19,7 @@
           <h2 class='txt-h2 mb6'>Florida Red Tide Events 2007-2015</h2>
           <p>This map displays significant red tide events caused by the bacteria Karenia brevis in Florida from the years 2007-2015.</p>
           <h3 class='txt-l mt18 mb12'>What is Karenia brevis?</h3>
-          <p>Karenia brevis is a single-cell algae responsible for causing "Florida red tide" events, a unique moniker or harmful algae blooms.  </p>
+          <p>Karenia brevis is a single-cell algae responsible for causing "Florida red tide" events, a unique moniker or harmful algae blooms. </p>
           <h3 class='txt-l mt18 mb12'>Red Tide Effects on Marine and Human Health</h3>
           <p></p>
           <h3 class='txt-l mt18 mb12'>Relationship to Fish Kills</h3>
@@ -56,9 +56,14 @@
       </div>
 
       <!-- legend -->
-      <div id='legend' class='bg-white round-ml px12 py12'>
-        <h3 class='txt-bold mb10 w-full mx-auto'>Presence of Karenia brevis (cells/liter)</h3>
-        <div class='bg-blue h180 w180 mx-auto'></div>
+      <div id='legend' class='bg-white round px12 py12 relative'>
+        <h3 class='txt-bold mb12 w180'>Presence of Karenia brevis (cells/liter)</h3>
+        <div class='legend-circles relative w180'>
+          <div class="legend-large border border--gray-light absolute"></div>
+          <div class="legend-small border border--gray-light absolute"></div>
+          <div class="legend-large-label txt-m absolute"></div>
+          <div class="legend-small-label txt-m absolute"></div>
+        </div>
       </div>
 
     </div>

@@ -157,11 +157,11 @@
 
     legendControl.addTo(map);
 
-    var dataValues = data.features.map(function(samples) {
+    var dataValues = data.features.map(function (samples) {
 
-      for (var samples in count_.properties) {
+      for (var count in samples.properties) {
 
-        var value = count_.properties[samples];
+        var value = samples.properties[count];
 
         if (+value) {
 
@@ -176,7 +176,11 @@
       return b - a;
     });
 
+    console.log(sortedValues);
+
     var maxValue = Math.round(sortedValues[0] / 1000) * 1000;
+
+    console.log(maxValue);
 
     var largeDiameter = calcRadius(maxValue) * 2,
       smallDiameter = largeDiameter / 2;
