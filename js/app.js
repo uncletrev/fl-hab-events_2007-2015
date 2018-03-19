@@ -65,7 +65,7 @@
       if (+layer.feature.properties.YEAR != val) {
         layer.setStyle({
           opacity: 0,
-          fillOpacity: 0
+          fillOpacity: 0.04
         })
       } else {
         layer.setStyle({
@@ -157,7 +157,7 @@
 
     legendControl.addTo(map);
 
-    var dataValues = data.features.map(function(samples) {
+    var dataValues = data.features.map(function(count) {
 
       for (var samples in samples.properties) {
 
@@ -220,27 +220,24 @@
 
     sliderControl.onAdd = function(map) {
 
-      var sliderYear = ["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]
+      var controls = L.DomUtil.get("year");
 
       L.DomEvent.disableScrollPropagation(slider);
       L.DomEvent.disableClickPropagation(slider);
 
-      return sliderYear;
+      return controls;
 
     }
 
-    sliderControl.addTo(map);
-
-
-    $('#slider input[type=range]')
+    $('#year span').html(dataLayer)
       .on('input', function() {
-        //var sampleYears =
-
-        //["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]
+        var controls = this.value;
 
         resizeCircles(dataLayer, this.value);
 
       });
+
+    sliderControl.addTo(map);
 
   }
 
@@ -251,10 +248,6 @@
       var props = layer.feature.properties;
 
       var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + layer.feature.properties.Count_ + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Adundance: " + props["COUNT_CLASS"]
-
-      //wrong year sample dates are ;appearing in the wrong year...
-
-      //need to write function for FWC bacteria count classification and include it in the popup
 
       layer.bindTooltip(tooltipInfo, {
         sticky: true,
