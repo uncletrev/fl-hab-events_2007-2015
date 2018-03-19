@@ -15,6 +15,7 @@
   omnivore.csv('data/hab_events_2007-2015_10000_min.csv')
     .on('ready', function(e) {
       drawMap(e.target.toGeoJSON());
+      drawLegend(e.target.toGeoJSON());
     })
     .on('error', function(e) {
       console.log(e.error[0].message);
@@ -52,7 +53,7 @@
 
   function calcRadius(val) {
     var radius = Math.sqrt(val / Math.PI);
-    return radius * .003
+    return radius * .005
   }
 
   function resizeCircles(dataLayer, val) {
@@ -68,32 +69,32 @@
         })
       } else {
         layer.setStyle({
-          opacity: .9,
-          fillOpacity: .6
+          opacity: 1.0,
+          fillOpacity: 0.9
         })
       }
     });
   }
 
-/* How to get this function working without turning on hidden data layers hidden by line 62?
-  function mouseoverCircles(dataLayer, val) {
+  /* How to get this function working without turning on hidden data layers hidden by line 62?
+    function mouseoverCircles(dataLayer, val) {
 
-    if (+layer.feature.properties.YEAR == val) {
-      layer.on('mouseover', function() {
-        layer.setStyle({
-          opacity: 1,
-          fillOpacity: 1
+      if (+layer.feature.properties.YEAR == val) {
+        layer.on('mouseover', function() {
+          layer.setStyle({
+            opacity: 1,
+            fillOpacity: 1
+          });
         });
-      });
-      layer.on('mouseout', function() {
-        layer.setStyle({
-          opacity: 1,
-          fillOpacity: 1
+        layer.on('mouseout', function() {
+          layer.setStyle({
+            opacity: 1,
+            fillOpacity: 1
+          });
         });
-      });
+      }
     }
-  }
-*/
+  */
 
 
   function sequenceUI(dataLayer) {
@@ -156,6 +157,59 @@
 
     legendControl.addTo(map);
 
+    var dataValues = data.features.map(function(samples) {
+
+      for (var samples in samples.properties) {
+
+        var value = samples.properties[samples];
+
+        if (+value) {
+
+          return +value;
+        }
+      }
+    });
+
+    console.log(dataValues);
+
+    var sortedValues = dataValues.sort(function(a, b) {
+      return b - a;
+    });
+
+    var maxValue = Math.round(sortedValues[0] / 1000) * 1000;
+
+    var largeDiameter = calcRadius(maxValue) * 2,
+      smallDiameter = largeDiameter / 2;
+
+    $(".legend-circles").css('height', largeDiameter.toFixed());
+
+    $('.legend-large').css({
+      'width': largeDiameter.toFixed(),
+      'height': largeDiameter.toFixed(),
+    });
+
+    $('.legend-small').css({
+      'width': smallDiameter.toFixed(),
+      'height': smallDiameter.toFixed(),
+      'top': largeDiameter - smallDiameter,
+      'left': smallDiameter / 2
+    })
+
+    $(".legend-large-label").html(maxValue.toLocaleString());
+    $(".legend-small-label").html((maxValue / 2).toLocaleString());
+
+    $(".legend-large-label").css({
+      'top': -11,
+      'left': largeDiameter + 30,
+    });
+
+    $(".legend-small-label").css({
+      'top': smallDiameter - 11,
+      'left': largeDiameter + 30
+    });
+
+    $("<hr class='large'>").insertBefore(".legend-large-label")
+    $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
   }
 
   function sequenceYear(dataLayer) {
@@ -192,11 +246,11 @@
 
   function updateMap(dataLayer) {
 
-    dataLayer.eachLayer(function (layer) {
+    dataLayer.eachLayer(function(layer) {
 
       var props = layer.feature.properties;
 
-      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + layer.feature.properties.Count_.toLocaleString() + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>"
+      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + layer.feature.properties.Count_ + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Adundance: " + props["COUNT_CLASS"]
 
       //wrong year sample dates are ;appearing in the wrong year...
 
