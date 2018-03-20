@@ -1,15 +1,15 @@
-(function() {
+(function(map) {
 
   L.mapbox.accessToken = 'pk.eyJ1Ijoicmdkb25vaHVlIiwiYSI6Im5Ua3F4UzgifQ.PClcVzU5OUj17kuxqsY_Dg';
 
-  var map = L.mapbox.map('map', 'mapbox.light', {
-    zoomSnap: .1,
-    center: [27.92, -83.91],
-    zoom: 7,
+  var map = L.mapbox.map('map', 'mapbox.dark', {
+
+    zoomSnap: .5,
+    center: [26.92, -83.86],
+    zoom: 7.25,
     dragging: true,
     zoomControl: true,
     intertia: true
-    //mapbox.light to adjust basemap later on
   });
 
   omnivore.csv('data/hab_events_2007-2015_10000_min.csv')
@@ -18,7 +18,6 @@
       drawLegend(e.target.toGeoJSON());
     })
     .on('error', function(e) {
-      console.log(e.error[0].message);
     });
 
   function drawMap(data) {
@@ -41,7 +40,7 @@
 
     map.setZoom(map.getZoom() - .4);
 
-    console.log(data);
+    //console.log(data);
 
     resizeCircles(dataLayer, 2007);
 
@@ -51,29 +50,8 @@
 
   function calcRadius(val) {
     var radius = Math.sqrt(val / Math.PI);
-    return radius * .005
+    return radius * .008
   }
-
-  /* How to get this function working without turning on hidden data layers hidden by line 62?
-    function mouseoverCircles(dataLayer, val) {
-
-      if (+layer.feature.properties.YEAR == val) {
-        layer.on('mouseover', function() {
-          layer.setStyle({
-            opacity: 1,
-            fillOpacity: 1
-          });
-        });
-        layer.on('mouseout', function() {
-          layer.setStyle({
-            opacity: 1,
-            fillOpacity: 1
-          });
-        });
-      }
-    }
-  */
-
 
   function sequenceUI(dataLayer) {
 
@@ -96,13 +74,28 @@
 
     $('#slider input[type=range]')
       .on('input', function() {
-        //var sampleYears =
 
-        //["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]
-
+    $('#year span').html(this.value);
         resizeCircles(dataLayer, this.value);
 
       });
+
+    var sliderControl = L.control({
+      position: 'bottomleft'
+    });
+
+    sliderControl.onAdd = function(map) {
+
+      var slider = L.DomUtil.get("year");
+
+      L.DomEvent.disableScrollPropagation(slider);
+      L.DomEvent.disableClickPropagation(slider);
+
+      return slider;
+
+    }
+
+    sliderControl.addTo(map);
 
   }
 
@@ -138,19 +131,19 @@
     var dataValues = data.features.map(function(samples) {
       return +samples.properties.Count_
 
-    }); //OBJECT_ID is being looped not Count_
+    });
 
-    console.log(dataValues);
+    //console.log(dataValues);
 
     var sortedValues = dataValues.sort(function(a, b) {
       return b - a;
     });
 
-    console.log(sortedValues);
+    //console.log(sortedValues);
 
-    var maxValue = Math.round(sortedValues[0] / 1000) * 1000;
+    var maxValue = Math.round(sortedValues[8] / 1000) * 1000;
 
-    console.log(maxValue);
+    //console.log(maxValue);
 
     var largeDiameter = calcRadius(maxValue) * 2,
       smallDiameter = largeDiameter / 2;
@@ -235,7 +228,7 @@
       } else {
         layer.setStyle({
           opacity: 1.0,
-          fillOpacity: 0.9
+          fillOpacity: 0.7
         })
         layer.bindTooltip(tooltipInfo, {
           sticky: true,
@@ -246,16 +239,4 @@
     });
   }
 
-
-
-})();
-
-//TO-DO LIST:
-
-//write legend function
-//write year slider function
-//write function for FWC bacteria count classifications and include in popup or modify CSV to include classification as a column
-//update descriptive map info
-//fix erroneous data circles that show sample dates in the wrong year
-//fix code to 100% opacity when mouseover
-//add commas to bacteria count
+})(map);

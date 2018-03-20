@@ -4,7 +4,7 @@
 <head>
   <meta charset=utf-8 />
   <title>MAP673 Final Project</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- loading Assembly CSS here -->
   <link href='https://api.mapbox.com/mapbox-assembly/v0.20.0/assembly.min.css' rel='stylesheet'>
   <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
@@ -12,57 +12,93 @@
 </head>
 
 <body>
-  <div class='flex-parent viewport-full relative scroll-hidden'>
-    <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
-      <div class='flex-parent flex-parent--column viewport-third h-full hmax-full bg-white py18 px12'>
+  <div class='flex-parent viewport-full relative scroll-auto'>
+    <div id='column' class='flex-child w-half w360-ml left bottom'>
+      <div class='flex-parent flex-parent--column viewport-full h-full hmax-full bg-gray-faint py24 px18'>
         <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
-          <h2 class='txt-h2 mb6'>Florida Red Tide Events 2007-2015</h2>
-          <p>This map displays significant red tide events caused by the bacteria Karenia brevis in Florida from the years 2007-2015.</p>
-          <h3 class='txt-l mt18 mb12'>What is Karenia brevis?</h3>
-          <p>Karenia brevis is a single-cell algae responsible for causing "Florida red tide" events, a unique moniker or harmful algae blooms. </p>
-          <h3 class='txt-l mt18 mb12'>Red Tide Effects on Marine and Human Health</h3>
-          <p></p>
-          <h3 class='txt-l mt18 mb12'>Relationship to Fish Kills</h3>
-          <p></p>
-          <h3 class='txt-l mt18 mb12'>Data Collection Methods</h3>
-          <p></p>
+          <h2 class='txt-h2 txt-bold mb12' style="color:red">Florida Red Tide Events 2007-2015</h2>
+          <p>This map displays significant red tide events caused by the bacteria Karenia brevis in Florida from the years 2007-2015. Hovering over every circle (event) provides a popup with specific information about that event. A significant red tide event
+            is distinguished by a water sample that has a concentration of 10,000 or Karenia brevis cells/liter, which can have adverse affects on marine and human health.</p>
+          <h3 class='txt-bold txt-l mt12 mb12'>What is Karenia brevis?</h3>
+          <p>Karenia brevis is a single-cell algae responsible for causing "Florida red tide" events, which is a unique moniker that distinguishes red tide events caused by K. brevis from other types of algae. Typically occuring in late summer and early
+            autumn, red tide blooms develop offshore and are brought inshore by currents and winds. There is no direct cause between human activity and blooms, although once blooms move inshore, pollution sources can proliferate existing blooms.</p>
+          <h3 class='txt-bold txt-l mt12 mb12'>Classification of Significant Red Tide Events</h3>
+          <p>
+            <table class='table'>
+              <thead>
+                <tr>
+                  <th>Karenia brevis Count (cells/liter)</th>
+                  <th>Karenia brevis Presence</th>
+                  <th>Possible Effects</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10,000 to 100,000</td>
+                  <td class='txt-bold' style='color:yellow'>Low</td>
+                  <td>Some respiratory irritation, possible fish kills</td>
+                </tr>
+                <tr>
+                  <td>100,000 to 1,000,000</td>
+                  <td class='txt-bold' style="color:orange">Medium</td>
+                  <td>Respiratory irriation, probable fish kills</td>
+                </tr>
+                <tr>
+                  <td>
+                    <1,000,000</td>
+                      <td class='txt-bold' style="color:red">High</td>
+                      <td> As above plus water discoloration</td>
+                </tr>
+              </tbody>
+            </table>
+          </p>
+          <h3 class='txt-bold txt-l mt12 mb12'>Red Tide Effects on Marine and Human Health and Tourism</h3>
+          <p>K. brevis produce powerful neurotoxins called brevetoxins that that can adversely affect fish, seabirds, turtles, and marine mammals and affect human health by causing respiratory irritation or shellfish poisoning if shellfish contaminated by
+            the nueortoxins are consumed. Less frequently, K. brevis red tide blooms can cause fish kills by depleting the water of dissolved oxygen and brevotoxins paralyzing the central nervous systems of fish. K. brevis red tide blooms can even be
+            fatal to dolphins and manatees.
+            <br></br>
+            Various shellfish like clams, mussels, and oysters can accumulate brevetoxins and if consumed by humans can cause Neurotoxic Shellfish Poisoning (NSP). FWC describes any red tide events with a K. brevis concentration of higher than 10,000 cells/liter
+            as a harmful algal bloom event that can cause fish kills. Medium concentration of K. brevis, 100,000 to 1,000,000 cells/liter can cause respiratory irritation in humans and are likely to cause fish kills. High concentrations of K. brevis,
+            greater than 1,000,000 cells/liter have a high probability of causing fish kills. If any of these events occur close to shore they can have a severe adverse affect on tourism as water at beaches become discolored, foul smelling, and can cause
+            illnesses to humans.</p>
+          <h3 class='txt-bold txt-l mt12 mb12'>Data Collection Methods</h3>
+          <p>These samples were collected by the Florida Fish & Wildlife Commission (FWC) and volunteers over this timespan and do not represent every single significant Florida red tide event occurred over this timespan.</p>
+          <h3 class='txt-bold txt-l mt12 mb12'>Sources</h3>
+          <p><a href='http://myfwc.com/media/3333198/Karenia-brevis-factsheet.pdf' target="_blank" style="color:red" class="txt-bold">Karenia brevis Fact Sheet</a></br>
+            <a href='http://myfwc.com/research/redtide/statewide/' target="_blank" style="color:red" class="txt-bold">FWC Red Tide Status</a></br>
+            <a href='http://myfwc.com/research/redtide/faq/' target="_blank" style="color:red" class="txt-bold">FWC Red Tide FAQ</a><br>
+            <a target="_blank" href='http://geodata.myfwc.com/datasets?t=Harmful%20Algal%20Bloom' style="color:#red" class="txt-bold">See the Data</a></br>
+            <h3 class='txt-bold txt-l mt12 mb12'>Author</h3>
+            <p>Map authored by
+              <a target="_blank" href='https://github.com/uncletrev' style="color:#red" class="txt-bold">Trevor Conley</a></br>
+              Explore my <a target="_blank" href='https://uncletrev.github.io/nmp-673/' style="color:#F10500" class="txt-bold">Portfolio</a></br>
+            </p>
         </div>
-        <footer class='px12 py12 bg-gray-faint txt-s'>
-          <ul>
-            <li>Explore the
-              <a target="_blank" href='http://myfwc.com/research/redtide/' style="color:#00550A">Data</a>
-            </li>
-            <li>Map authored by
-              <a target="_blank" href='https://github.com/uncletrev' style="color:#00550A">Trevor Conley</a>
-            </li>
-          </ul>
-        </footer>
       </div>
     </div>
     <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
       <div id="map" class='viewport-twothirds viewport-full-ml'></div>
 
       <!-- ui slider -->
-      <div id='slider' class='range w240 bg-white round-ml px12'>
+      <div id='slider' class='range w240 bg-gray-light round-ml px12'>
         <input type='range' min="2007" , max="2015" , value="2007" , step="1" class="ui-slider" />
       </div>
 
       <!--- ui slider legend -->
-      <div id='year' class='pt6 px12 bg-white border border--gray-light round'>
-        <input type='range' min='2007' , max='2015' , value="2007" , step="1" />
+      <div id='year' class='pt6 px12 bg-gray-light border border--gray-light round'>
         <p class='txt-bold'>Year:
           <span>2007</span>
         </p>
       </div>
 
       <!-- legend -->
-      <div id='legend' class='bg-white round px12 py12 relative'>
-        <h3 class='txt-bold mb12 w180'>Presence of Karenia brevis (cells/liter)</h3>
+      <div id='legend' class='bg-gray-light round px12 py12 relative'>
+        <h3 class='txt-bold mb18 w260'>Karenia brevis Presence (cells/liter)</h3>
         <div class='legend-circles relative w180'>
-          <div class="legend-large border border--gray-light absolute"></div>
-          <div class="legend-small border border--gray-light absolute"></div>
-          <div class="legend-large-label txt-m absolute"></div>
-          <div class="legend-small-label txt-m absolute"></div>
+          <div class="legend-large border border--black absolute"></div>
+          <div class="legend-small border border--black absolute"></div>
+          <div class="legend-large-label txt-m txt-black absolute"></div>
+          <div class="legend-small-label txt-m txt-black absolute"></div>
         </div>
       </div>
 

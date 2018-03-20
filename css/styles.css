@@ -2,46 +2,10 @@
     background: #448ee4;
   }
 
-  .legend {
-    padding: 5px 6px;
-    font-size: 1em;
-    background: rgba(75, 75, 75, 0.8);
-    color: whitesmoke;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    width: 180px;
-  }
-
-  .legend h3 {
-    font-size: 1.2em;
-    font-weight: bold;
-    line-height: 1em;
-    color: whitesmoke;
-    margin: 10px;
-  }
-
-  .legend h3 span {
-    font-size: 1.3em;
-    margin: 0 20px 0 0;
-  }
-
-  .legend ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 12px 4px 12px;
-  }
-
-  .legend li {
-    height: 22px;
-  }
-
-  .legend span {
-    width: 30px;
-    height: 20px;
-    float: left;
-    margin-right: 10px;
-  }
-
   .legend-circles div {
     border-radius: 50%;
+  }
+
+  .column div {
+    width: 33.33%;
   }
