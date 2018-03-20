@@ -214,7 +214,7 @@
 
       var props = layer.feature.properties;
 
-      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + Number(layer.feature.properties.Count_).toLocaleString() + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Adundance: " + props["COUNT_CLASS"]
+      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + Number(layer.feature.properties.Count_).toLocaleString() + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Presence: " + props["COUNT_CLASS"]
 
       var radius = calcRadius(Number(layer.feature.properties['Count_']));
       layer.setRadius(radius);
