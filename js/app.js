@@ -5,7 +5,7 @@
   var map = L.mapbox.map('map', 'mapbox.dark', {
 
     zoomSnap: .5,
-    center: [26.92, -83.86],
+    center: [27.22, -83.86],
     zoom: 7.25,
     dragging: true,
     zoomControl: true,
@@ -214,7 +214,7 @@
 
       var props = layer.feature.properties;
 
-      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + Number(layer.feature.properties.Count_).toLocaleString() + " cells/liter" + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Presence: " + props["COUNT_CLASS"]
+      var tooltipInfo = "<b>" + "Sample Date: " + props["SAMPLE_DAT"] + "</b></br>" + "<b>" + "Karenia brevis Count: " + Number(layer.feature.properties.Count_).toLocaleString() + " cells/liter" + "</b></br>" + "<b>" + "Location: " + props["LOCATION"] + "</b></br>" + "<b>" + "Depth of Sample: " + props["DEPTH"] + " feet" + "</b></br>" + "<b>" + "Karenia brevis Presence: " + props["COUNT_CLASS"]
 
       var radius = calcRadius(Number(layer.feature.properties['Count_']));
       layer.setRadius(radius);

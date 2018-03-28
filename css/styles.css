@@ -1,11 +1,15 @@
-  #map {
-    background: #448ee4;
-  }
+body {
+  background-color:  white;
+}
 
-  .legend-circles div {
-    border-radius: 50%;
-  }
+#map {
+  background: #448ee4;
+}
 
-  .column div {
-    width: 33.33%;
-  }
+.legend-circles div {
+  border-radius: 50%;
+}
+
+.column div {
+  width: 33.33%;
+}
